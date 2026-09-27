@@ -49,6 +49,28 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation("androidx.compose.material:material-icons-extended")
+
+    // Networking (Retrofit & OkHttp)
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    // QR Code Generation & Scanning (ZXing)
+    implementation("com.google.zxing:core:3.5.3")
+
+    // Google Maps
+    implementation("com.google.android.gms:play-services-maps:19.0.0")
+
+    // CameraX for QR Scanning
+    implementation("androidx.camera:camera-core:1.4.1")
+    implementation("androidx.camera:camera-camera2:1.4.1")
+    implementation("androidx.camera:camera-lifecycle:1.4.1")
+    implementation("androidx.camera:camera-view:1.4.1")
+
+    // ViewModel & Coroutines
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
