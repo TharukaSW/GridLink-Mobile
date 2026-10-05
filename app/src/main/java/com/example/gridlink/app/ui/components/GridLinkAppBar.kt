@@ -13,7 +13,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.Logout
 import androidx.compose.material.icons.filled.Bolt
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -22,10 +21,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -45,11 +40,8 @@ fun GridLinkAppBar(
     showBackButton: Boolean = false,
     onBackClick: () -> Unit = {},
     showLogout: Boolean = true,
-    onLogoutClick: () -> Unit = {},
-    onServerConfigUpdated: (String) -> Unit = {}
+    onLogoutClick: () -> Unit = {}
 ) {
-    var showServerConfig by remember { mutableStateOf(false) }
-
     TopAppBar(
         title = {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -107,14 +99,6 @@ fun GridLinkAppBar(
             }
         },
         actions = {
-            IconButton(onClick = { showServerConfig = true }) {
-                Icon(
-                    imageVector = Icons.Default.Settings,
-                    contentDescription = "Server Settings",
-                    tint = Color.White
-                )
-            }
-
             if (showLogout && !userRole.isNullOrBlank()) {
                 IconButton(onClick = onLogoutClick) {
                     Icon(
@@ -129,13 +113,4 @@ fun GridLinkAppBar(
             containerColor = Slate900
         )
     )
-
-    if (showServerConfig) {
-        ServerConfigDialog(
-            onDismiss = { showServerConfig = false },
-            onUrlChanged = { newUrl ->
-                onServerConfigUpdated(newUrl)
-            }
-        )
-    }
 }
