@@ -318,7 +318,7 @@ fun CreateReservationScreen(
 
                     Spacer(Modifier.height(10.dp))
                     Text(
-                        text = "Scheduled Time: ${DateUtils.toIsoString(scheduledCalendar).replace('T', ' ')}",
+                        text = "Scheduled Time: ${DateUtils.formatDisplayDate(scheduledCalendar)}",
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 13.sp,
                         color = GreenPrimary

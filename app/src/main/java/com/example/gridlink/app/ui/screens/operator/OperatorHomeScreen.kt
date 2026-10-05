@@ -115,8 +115,7 @@ fun OperatorHomeScreen(
                 title = "GridLink Operator",
                 userRole = "GridOperator",
                 showLogout = true,
-                onLogoutClick = onLogout,
-                onServerConfigUpdated = { loadData() }
+                onLogoutClick = onLogout
             )
         }
     ) { padding ->

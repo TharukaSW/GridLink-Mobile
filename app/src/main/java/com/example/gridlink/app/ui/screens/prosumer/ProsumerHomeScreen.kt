@@ -123,8 +123,7 @@ fun ProsumerHomeScreen(
                 title = "GridLink Prosumer",
                 userRole = "Prosumer",
                 showLogout = true,
-                onLogoutClick = onLogout,
-                onServerConfigUpdated = { loadData() }
+                onLogoutClick = onLogout
             )
         }
     ) { padding ->
