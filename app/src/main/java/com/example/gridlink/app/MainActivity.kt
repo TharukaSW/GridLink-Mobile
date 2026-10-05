@@ -1,47 +1,44 @@
 package com.example.gridlink.app
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.example.gridlink.app.ui.navigation.AppNavigation
 import com.example.gridlink.app.ui.theme.GridLinkTheme
 
+import android.util.Log
+
 class MainActivity : ComponentActivity() {
+    private val screenKeyMutable = mutableStateOf<String?>(null)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        val key = intent.getStringExtra("screen")
+        Log.d("GridLinkNav", "onCreate screen: $key")
+        screenKeyMutable.value = key
         setContent {
             GridLinkTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    val currentKey = screenKeyMutable.value
+                    Log.d("GridLinkNav", "setContent AppNavigation currentKey: $currentKey")
+                    AppNavigation(initialScreenKey = currentKey)
                 }
             }
         }
     }
-}
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    GridLinkTheme {
-        Greeting("Android")
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        setIntent(intent)
+        val key = intent.getStringExtra("screen")
+        Log.d("GridLinkNav", "onNewIntent screen: $key")
+        screenKeyMutable.value = key
     }
 }
